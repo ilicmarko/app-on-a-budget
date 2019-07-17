@@ -1,0 +1,46 @@
+version: 2
+jobs:
+  # Install node dependencies.
+  nodeModules:
+    docker:
+      - image: circleci/node:10.15.0
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-v1-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+      - run: yarn --frozen-lockfile
+      - run:
+          command: yarn autoclean --force
+      - save_cache:
+          paths:
+            - node_modules
+            - ~/.yarn
+            - ~/.config/yarn
+          key: node-v1-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+
+  variableTest:
+    docker:
+      - image: circleci/node:10.15.0
+
+    steps:
+      - checkout
+      - run:
+          name: "Show a variable for test"
+          command: echo ${CIRCLE_PULL_REQUEST##*/}
+      - run:
+          name: "Set a variable for test"
+          command: export TEST_URL="${CIRCLE_PULL_REQUEST##*/}"' >> $BASH_ENV
+      - run:
+          name: "What was my custom environment variable?"
+          command: echo ${TEST_URL}
+
+workflows:
+  version: 2
+  installAndVarTest:
+    jobs:
+      - nodeModules
+      - variableTest:
+          requires:
+            - nodeModules

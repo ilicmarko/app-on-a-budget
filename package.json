@@ -2,9 +2,16 @@
   "name": "app-on-a-budget",
   "version": "1.0.0",
   "description": "A lightweight website on a budget.",
+  "engines": {
+    "node": "^11.4.0",
+    "npm": "6.7.0",
+    "yarn": "1.x"
+  },
   "scripts": {
     "build": "webpack --config webpack/webpack.config.prod.js  --colors",
-    "start": "webpack-dev-server --open --config webpack/webpack.config.dev.js"
+    "dev": "webpack-dev-server --open --config webpack/webpack.config.dev.js",
+    "postinstall": "yarn run build",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -38,6 +45,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.0",
-    "core-js": "^3.0.1"
+    "core-js": "^3.0.1",
+    "express": "^4.17.1"
   }
 }

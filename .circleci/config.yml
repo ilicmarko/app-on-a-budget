@@ -58,8 +58,8 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        keys:
-          - node-v1-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+          keys:
+            - node-v1-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
       - attach_workspace:
           at: "."
       - store_artifacts:
@@ -76,11 +76,11 @@ workflows:
     jobs:
       - nodeModules
       - deployToStaging:
-        requires:
-          - nodeModules
+          requires:
+            - nodeModules
       - runPerfTest:
-        requires:
-          - deployToStaging
+          requires:
+            - deployToStaging
       - updatePr:
-        requires:
-          - runPerfTest
+          requires:
+            - runPerfTest

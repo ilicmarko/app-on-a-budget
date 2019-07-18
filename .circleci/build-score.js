@@ -17,7 +17,8 @@ function showOrSkipScore(score) {
 
 function generateReport({newScore, requiredScore, report}) {
     return `
-<p><a href="https://developers.google.com/web/tools/lighthouse/" rel="nofollow">Lighthouse</a> report for the changes in this PR:</p>
+<h2>Lighthouse report</h2>
+<p><a href="https://developers.google.com/web/tools/lighthouse/" rel="nofollow">Lighthouse</a> has been ran report for the changes in this PR:</p>
 <table>
   <thead>
     <tr>
@@ -115,12 +116,6 @@ circleStdOut.push(
     `Number of parallel test runs: ${reports.json.length}`,
     `------------------------------------------`
 );
-
-comment.push(
-    `<h2>Lighthouse report</h2>`,
-    `<p>Best scores across <strong>${reports.json.length}</strong> runs:</p>`,
-);
-
 let data = {
     newScore: {},
     requiredScore: {},
@@ -153,7 +148,7 @@ function msToHuman(ms) {
 }
 
 additionalAudits.forEach(key => {
-    let audit = { numericValue: Number.MAX_SAFE_INTEGER };
+    let audit = { numericValue: 17072907 };
     reports.json.forEach(report => {
         audit.title = report.audits[key].title;
         audit.numericValue = Math.min(audit.numericValue, report.audits[key].numericValue);

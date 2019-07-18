@@ -83,7 +83,7 @@ comment.push(`<hr /><p><strong>Detailed reports:</strong> ${reportLinks.join(', 
 console.log(circleStdOut.join('\n'));
 
 try {
-    bot.comment(comment.join('\n'));
+    bot.comment(process.env.GH_AUTH_TOKEN, comment.join('\n'));
 } catch (e) {
     console.error(e);
 }

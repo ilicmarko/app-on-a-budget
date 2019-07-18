@@ -82,5 +82,5 @@ workflows:
         requires:
           - deployToStaging
       - updatePr:
-          requires:
-            - runPerfTest
+        requires:
+          - runPerfTest

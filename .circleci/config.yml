@@ -25,28 +25,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: "Deploy Branch to Heroku"
-        command: |
-          git push -f https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git $CIRCLE_BRANCH:master
-#  variableTest:
-#    docker:
-#      - image: circleci/node:11.4.0
-#
-#    steps:
-#      - checkout
-#      - run:
-#          name: "Show CIRCLE_PR_NUMBER"
-#          command: echo ${CIRCLE_PR_NUMBER}
-#      - run:
-#          name: "Show CIRCLE_PULL_REQUEST"
-#          command: echo ${CIRCLE_PULL_REQUEST}
-#      - run:
-#          name: "Set a variable for test"
-#          command: |
-#            echo 'export TEST_URL="${CIRCLE_PR_NUMBER}"' >> $BASH_ENV
-#      - run:
-#          name: "What was my custom environment variable?"
-#          command: echo ${TEST_URL}
+          name: "Deploy Branch to Heroku"
+          command: git push -f https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git $CIRCLE_BRANCH:master
 
   runPerfTest:
     parallelism: 2

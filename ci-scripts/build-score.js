@@ -31,7 +31,7 @@ fs.readdirSync(reportsFolder).forEach(file => {
 });
 
 let comment = [];
-let circleStdOut = '';
+let circleStdOut = [];
 
 // Lets compare and calculate the score
 const lighthouseScores = reports.json.reduce((acc, report) => {
@@ -42,11 +42,11 @@ const lighthouseScores = reports.json.reduce((acc, report) => {
     return acc;
 }, {});
 
-circleStdOut += `
-------------------------------------------
-Number of parallel test runs: ${reports.json.length}
-------------------------------------------
-`;
+circleStdOut.push(
+    `------------------------------------------`,
+    `Number of parallel test runs: ${reports.json.length}`,
+    `------------------------------------------`
+);
 
 comment.push(
     `<h2>Lighthouse report</h2>`,
@@ -74,7 +74,6 @@ Object.keys(lighthouse).forEach(category => {
 comment.push(`</p>`);
 
 // Add a link to the report
-
 const reportLinks = reports.html.map((filename, id) =>
     bot.artifactLink(`reports/${filename}`, `run ${id + 1}`).replace('/home/circleci/project', '')
 );

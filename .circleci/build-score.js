@@ -143,20 +143,14 @@ const additionalAudits = [
 ];
 const additionalAuditsMetrics = {};
 
-function msToHuman(ms) {
-    return ms < 1000 ? `${Math.round(ms).toString()} ms` : `${(ms/1000).toFixed(1).toString()} s`;
-}
-
 additionalAudits.forEach(key => {
-    let audit = { numericValue: 17072907 };
+    // TODO: rawValue will change in newer versions.
+    let audit = { rawValue: Number.MAX_SAFE_INTEGER };
     reports.json.forEach(report => {
-        audit.title = report.audits[key].title;
-        audit.numericValue = Math.min(audit.numericValue, report.audits[key].numericValue);
-        audit.displayValue = msToHuman(audit.numericValue);
-        console.log(report.audits[key]);
+        if (report.audits[key].rawValue < audit.rawValue) {
+            audit = report.audits[key];
+        }
     });
-    console.log(report.audits[key].numericValue);
-    console.log(audit);
     additionalAuditsMetrics[key] = audit;
 });
 

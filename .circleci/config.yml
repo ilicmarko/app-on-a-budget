@@ -67,7 +67,7 @@ jobs:
           destination: reports
       - run:
           name: "Analyze and comment to the PR"
-          command: ./.circleci/build-score.js budget.json reports
+          command: ./ci-scripts/build-score.js budget.json reports
 
 
 workflows:

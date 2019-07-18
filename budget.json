@@ -1,0 +1,9 @@
+{
+  "lighthouse": {
+    "performance": 90,
+    "accessibility": 80,
+    "best-practices": 80,
+    "seo": 80
+  },
+  "bundleSize": 200
+}

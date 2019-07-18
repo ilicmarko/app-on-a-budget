@@ -51,14 +51,36 @@ jobs:
           paths:
             - reports
 
+  updatePr:
+    docker:
+      - image: circleci/node:11.4.0
+
+    steps:
+      - checkout
+      - restore_cache:
+        keys:
+          - node-v1-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+      - attach_workspace:
+          at: "."
+      - store_artifacts:
+          path: reports
+          destination: reports
+      - run:
+          name: "Analyze and comment to the PR"
+          command: ./circleci/build-score.js budget.json reports
+
+
 workflows:
   version: 2
   deployAndTest:
     jobs:
       - nodeModules
       - deployToStaging:
-          requires:
-            - nodeModules
+        requires:
+          - nodeModules
       - runPerfTest:
+        requires:
+          - deployToStaging
+      - updatePr:
           requires:
-            - deployToStaging
+            - runPerfTest

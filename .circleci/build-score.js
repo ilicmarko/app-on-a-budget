@@ -149,7 +149,7 @@ const additionalAudits = [
 const additionalAuditsMetrics = {};
 
 function msToHuman(ms) {
-    return ms < 1000 ? `${Math.round(ms)} ms` : `${(ms/1000).toFixed(1)} s`;
+    return ms < 1000 ? `${Math.round(ms).toString()} ms` : `${(ms/1000).toFixed(1).toString()} s`;
 }
 
 additionalAudits.forEach(key => {
@@ -159,6 +159,7 @@ additionalAudits.forEach(key => {
         audit.numericValue = Math.min(audit.numericValue, report.audits[key].numericValue);
         audit.displayValue = msToHuman(audit.numericValue);
     });
+    console.log(audit);
     additionalAuditsMetrics[key] = audit;
 });
 

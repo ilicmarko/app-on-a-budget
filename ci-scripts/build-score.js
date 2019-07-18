@@ -32,6 +32,7 @@ fs.readdirSync(reportsFolder).forEach(file => {
 
 let comment = [];
 let circleStdOut = [];
+let failed = false;
 
 // Lets compare and calculate the score
 const lighthouseScores = reports.json.reduce((acc, report) => {
@@ -58,11 +59,12 @@ Object.keys(lighthouse).forEach(category => {
    const budgetScore = lighthouse[category];
    const testScore = Math.max(...lighthouseScores[category]);
 
-    if (testScore < budgetScore[category]) {
+    if (testScore < budgetScore) {
         circleStdOut.push(`❌ ${category}: ${testScore}/${budgetScore}`);
         comment.push(
             `<strong>❌ ${category}:</strong> ${testScore}/${budgetScore}<br />`
         );
+        failed = true || failed;
     } else {
         circleStdOut.push(`✅ ${category}: ${testScore}/${budgetScore}`);
         comment.push(
@@ -87,5 +89,6 @@ try {
 } catch (e) {
     console.error(e);
 }
-
-process.exit(1);
+if (failed) {
+    process.exit(1);
+}

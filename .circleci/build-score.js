@@ -154,6 +154,8 @@ additionalAudits.forEach(key => {
         audit.numericValue = Math.min(audit.numericValue, report.audits[key].numericValue);
         audit.displayValue = msToHuman(audit.numericValue);
     });
+    console.log(report.audits[key]);
+    console.log(report.audits[key].numericValue);
     console.log(audit);
     additionalAuditsMetrics[key] = audit;
 });

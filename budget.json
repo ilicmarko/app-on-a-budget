@@ -3,7 +3,8 @@
     "performance": 90,
     "accessibility": 80,
     "best-practices": 90,
-    "seo": 95
+    "seo": 95,
+    "pwa": 0
   },
   "bundleSize": 200
 }

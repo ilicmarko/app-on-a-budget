@@ -44,8 +44,8 @@ function generateReport({newScore, requiredScore, report}) {
     </tr>
     <tr>
       <td>Best Practices</td>
-      <td>${newScore.best-practices}</td>
-      <td>${showOrSkipScore(requiredScore.best-practices)}</td>
+      <td>${newScore['best-practices']}</td>
+      <td>${showOrSkipScore(requiredScore['best-practices'])}</td>
     </tr>
     <tr>
       <td>SEO</td>
@@ -155,16 +155,17 @@ function msToHuman(ms) {
 additionalAudits.forEach(key => {
     let audit = { numericValue: Number.MAX_SAFE_INTEGER };
     reports.json.forEach(report => {
-        audit.title = report.audit[key].title
-        audit.numericValue = Math.min(audit.numericValue, report.audit[key].numericValue);
+        audit.title = report.audits[key].title;
+        audit.numericValue = Math.min(audit.numericValue, report.audits[key].numericValue);
         audit.displayValue = msToHuman(audit.numericValue);
     });
     additionalAuditsMetrics[key] = audit;
 });
 
-additionalAudits.lighthouseVersion = reports[0].lighthouseVersion;
+additionalAuditsMetrics.lighthouseVersion = reports.json[0].lighthouseVersion;
+data.report = additionalAuditsMetrics;
 
-comment.push(generateReport(additionalAuditsMetrics));
+comment.push(generateReport(data));
 
 // Add a link to the report
 const reportLinks = reports.html.map((filename, i) => {

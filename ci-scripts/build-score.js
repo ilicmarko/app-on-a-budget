@@ -80,15 +80,12 @@ const reportLinks = reports.html.map((filename, id) =>
 
 comment.push(`<hr /><p><strong>Detailed reports:</strong> ${reportLinks.join(', ')}</p>`);
 
-console.log(circleStdOut.join(`\n`));
+console.log(circleStdOut.join('\n'));
 
 try {
-    bot.comment(comment.join(`\n`));
+    bot.comment(comment.join('\n'));
 } catch (e) {
     console.error(e);
 }
 
-
-
-
-
+process.exit(1);

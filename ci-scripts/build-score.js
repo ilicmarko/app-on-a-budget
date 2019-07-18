@@ -74,9 +74,9 @@ Object.keys(lighthouse).forEach(category => {
 comment.push(`</p>`);
 
 // Add a link to the report
-const reportLinks = reports.html.map((filename, id) =>
-    bot.artifactLink(`reports/${filename}`, `run ${id + 1}`).replace('/home/circleci/project', '')
-);
+const reportLinks = reports.html.map((filename, i) => {
+    return bot.artifactLink(`reports/${filename}`, `run ${i + 1}`).replace('/home/circleci/project', '');
+});
 
 comment.push(`<hr /><p><strong>Detailed reports:</strong> ${reportLinks.join(', ')}</p>`);
 

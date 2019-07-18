@@ -1,6 +1,5 @@
 version: 2
 jobs:
-  # Install node dependencies.
   nodeModules:
     docker:
       - image: circleci/node:11.4.0
@@ -19,7 +18,16 @@ jobs:
             - ~/.yarn
             - ~/.config/yarn
           key: node-v1-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+  deployToStaging:
+    docker:
+      - image: circleci/node:11.4.0
 
+    steps:
+      - checkout
+      - run:
+        name: Deploy Branch to Heroku
+        command: |
+          git push -f https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git $CIRCLE_BRANCH:master
   variableTest:
     docker:
       - image: circleci/node:11.4.0
@@ -40,11 +48,37 @@ jobs:
           name: "What was my custom environment variable?"
           command: echo ${TEST_URL}
 
+  runPerfTest:
+    parallelism: 2
+    docker:
+      - image: kporras07/lighthouse-ci
+
+    steps:
+      - checkout
+      - run:
+          name: Run lighthouse against staging deployment
+          environment:
+            TEST_URL: https://website-on-a-budget-staging.herokuapp.com
+          command: |
+            lighthouse $TEST_URL \
+                          --port=9222 \
+                          --chrome-flags=\"--headless\" \
+                          --output-path=/home/chrome/reports/anonymous-"$(echo -n $CIRCLE_SHELL_ENV | md5sum | awk '{print $1}')" \
+                          --output=json \
+                          --output=html
+      - persist_to_workspace:
+          root: /home/chrome
+          paths:
+            - reports
+
 workflows:
   version: 2
-  installAndVarTest:
+  deployAndTest:
     jobs:
       - nodeModules
-      - variableTest:
+      - deployToStaging:
           requires:
             - nodeModules
+      - runPerfTest
+          requires:
+            - deployToStaging

@@ -6,8 +6,8 @@ class WeightAudit extends Audit {
         return {
             id: "weight-audit",
             title: "Velicina JS datoteke",
-            failureTitle: `JS bundle exceeds your threshold of ${
-                process.env.MAX_BUNDLE_SIZE_KB
+            failureTitle: `JS je veci od ${
+                process.env.BUNDLE_SIZE
             }kb`,
             description: "Alooo bato, ajmo malo crossfit za sajt!",
             // Sakpuljac (Getherer)

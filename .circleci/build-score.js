@@ -166,7 +166,7 @@ const reportLinks = reports.html.map((filename, i) => {
 
 comment.push(`<hr /><p><strong>Detailed reports:</strong> ${reportLinks.join(', ')}</p>`);
 
-console.log(circleStdOut.join('\n'));
+console.log(reports.json[0]);
 
 try {
     bot.comment(process.env.GH_AUTH_TOKEN, comment.join('\n'));

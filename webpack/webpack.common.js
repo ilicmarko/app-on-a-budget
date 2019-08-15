@@ -18,6 +18,11 @@ module.exports = {
     ]),
     new HtmlWebpackPlugin({
       template: Path.resolve(__dirname, '../src/index.html')
+    }),
+    new HtmlWebpackPlugin({
+      filename: "admin.html",
+      template: Path.resolve(__dirname, '../src/admin.html'),
+      chunks: ['app'],
     })
   ],
   resolve: {

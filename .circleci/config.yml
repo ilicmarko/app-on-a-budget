@@ -49,6 +49,28 @@ jobs:
                           --output-path=/home/chrome/reports/anonymous-"$(echo -n $CIRCLE_SHELL_ENV | md5sum | awk '{print $1}')" \
                           --output=json \
                           --output=html
+  runAuthTest:
+    parallelism: 2
+    docker:
+      - image: kporras07/lighthouse-ci
+
+    steps:
+      - checkout
+      - run: npm install puppeteer
+      - run:
+          name: "Run lighthouse against a page with authentication"
+          environment:
+            TEST_URL: https://website-on-a-budget-staging.herokuapp.com/login.html
+          command: |
+            BUNDLE_NAME="$(node -p 'require("./budget.json").bundleName')" \
+            BUNDLE_SIZE="$(node -p 'require("./budget.json").bundleSize')" \
+            lighthouse $TEST_URL \
+                          --port=9222 \
+                          --chrome-flags=\"--headless\" \
+                          --config-path=./.circleci/lighthouse/auth-audit-config.js \
+                          --output-path=/home/chrome/reports/anonymous-"$(echo -n $CIRCLE_SHELL_ENV | md5sum | awk '{print $1}')" \
+                          --output=json \
+                          --output=html
       - persist_to_workspace:
           root: /home/chrome
           paths:
@@ -82,6 +104,9 @@ workflows:
           requires:
             - nodeModules
       - runPerfTest:
+          requires:
+            - deployToStaging
+      - runAuthTest:
           requires:
             - deployToStaging
       - updatePr:

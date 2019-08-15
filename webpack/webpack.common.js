@@ -23,7 +23,12 @@ module.exports = {
       filename: "admin.html",
       template: Path.resolve(__dirname, '../src/admin.html'),
       chunks: ['app'],
-    })
+    }),
+    new HtmlWebpackPlugin({
+      filename: "login.html",
+      template: Path.resolve(__dirname, '../src/login.html'),
+      chunks: ['app'],
+    }),
   ],
   resolve: {
     alias: {

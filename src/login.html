@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login || Website on a budget</title>
+</head>
+<body>
+  <form id="login-form" action="admin.html">
+    <label for="us">username</label>
+    <input type="text" name="username" id="us">
+    <label for="pw">password</label>
+    <input type="password" name="password" id="pw">
+    <button type="submit">Log in</button>
+  </form>
+  <script>
+      const form = document.getElementById('login-form');
+
+      form.addEventListener("submit", () => {
+          const formData = new FormData(form);
+          localStorage.setItem('username', formData.get('username'));
+          localStorage.setItem('password', formData.get('password'));
+      });
+  </script>
+</body>
+</html>

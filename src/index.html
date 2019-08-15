@@ -7,23 +7,8 @@
 </head>
 <body>
   <h1>Website on a budget</h1>
-  <form id="login-form" action="admin.html">
-    <label for="us">username</label>
-    <input type="text" name="username" id="us">
-    <label for="pw">password</label>
-    <input type="password" name="password" id="pw">
-    <button type="submit">Log in</button>
-  </form>
+  <a href="login.html">Login</a>
   <p>Perfect <small>small</small> website on a <strong>budget</strong>.</p>
   <p>This is on <code>feature/add-scripts</code> branch.</p>
-  <script>
-      const form = document.getElementById('login-form');
-
-      form.addEventListener("submit", () => {
-          const formData = new FormData(form);
-          localStorage.setItem('username', formData.get('username'));
-          localStorage.setItem('password', formData.get('password'));
-      });
-  </script>
 </body>
 </html>

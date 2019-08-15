@@ -6,5 +6,6 @@
     "seo": 80,
     "pwa": 0
   },
-  "bundleSize": 200
+  "bundleSize": 200,
+  "bundleName": "app.js"
 }

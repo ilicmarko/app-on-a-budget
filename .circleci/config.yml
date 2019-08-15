@@ -40,9 +40,12 @@ jobs:
           environment:
             TEST_URL: https://website-on-a-budget-staging.herokuapp.com
           command: |
+            BUNDLE_NAME="$(node -p 'require("./package.json").lighthouse.bundleName')" \
+            BUNDLE_SIZE="$(node -p 'require("./package.json").lighthouse.bundleSize')" \
             lighthouse $TEST_URL \
                           --port=9222 \
                           --chrome-flags=\"--headless\" \
+                          --config-path=./.circleci/lighthouse/weight-audit-config.js \
                           --output-path=/home/chrome/reports/anonymous-"$(echo -n $CIRCLE_SHELL_ENV | md5sum | awk '{print $1}')" \
                           --output=json \
                           --output=html

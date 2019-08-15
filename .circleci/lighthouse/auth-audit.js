@@ -12,7 +12,7 @@ class AuthAudit extends Audit {
     }
     static async audit(artifacts, context) {
         return {
-            rawValue: 400,
+            rawValue: 420,
             score: 100,
             displayValue: 'Ok',
         }

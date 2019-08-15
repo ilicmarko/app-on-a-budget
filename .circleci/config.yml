@@ -112,3 +112,4 @@ workflows:
       - updatePr:
           requires:
             - runPerfTest
+            - runAuthTest

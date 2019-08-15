@@ -4,7 +4,11 @@ const puppeteer = require('puppeteer');
 class Auth extends Gatherer {
     async beforePass(options) {
 
-        const browser = await puppeteer.launch();
+        const ws = await options.driver.wsEndpoint();
+
+        const browser = await puppeteer.connect({
+            browserWSEndpoint: ws,
+        });
 
         const page = await browser.newPage();
         await page.goto(process.env.TEST_URL);

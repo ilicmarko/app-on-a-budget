@@ -40,8 +40,8 @@ jobs:
           environment:
             TEST_URL: https://website-on-a-budget-staging.herokuapp.com
           command: |
-            BUNDLE_NAME="$(node -p 'require("./package.json").lighthouse.bundleName')" \
-            BUNDLE_SIZE="$(node -p 'require("./package.json").lighthouse.bundleSize')" \
+            BUNDLE_NAME="$(node -p 'require("./package.json").bundleName')" \
+            BUNDLE_SIZE="$(node -p 'require("./package.json").bundleSize')" \
             lighthouse $TEST_URL \
                           --port=9222 \
                           --chrome-flags=\"--headless\" \

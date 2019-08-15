@@ -140,6 +140,7 @@ const additionalAudits = [
     'first-contentful-paint',
     'time-to-first-byte',
     'speed-index',
+    'weight-audit',
 ];
 const additionalAuditsMetrics = {};
 

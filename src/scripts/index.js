@@ -1,17 +1,13 @@
 import '../styles/index.scss';
 import _ from 'lodash';
+import moment from 'moment';
+
+console.log(moment().format('MMMM Do YYYY, h:mm:ss a'));
 
 let arr = [];
 
 for (let i = 1; i < 10000; i++) arr.push({i});
 
-function writeNext(i) {
-    _.map(arr, i => i.i);
-    document.write(i);
-    if(i === 100) return;
-    setTimeout(function() { writeNext(i + 1);}, 3000);
-}
-
-writeNext(1);
+_.map(arr, i => i);
 
 console.log('wow such JS much budget');

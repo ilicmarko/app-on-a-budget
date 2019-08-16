@@ -9,9 +9,13 @@ class Auth extends Gatherer {
         const browser = await puppeteer.connect({
             browserWSEndpoint: ws,
         });
+        console.log(ws);
 
         const page = await browser.newPage();
         await page.goto(process.env.TEST_URL);
+
+        console.log(process.env.ADMIN_USER);
+        console.log(process.env.ADMIN_PASSWORD);
 
         await page.click('input[name=username]');
         await page.keyboard.type(process.env.ADMIN_USER);
@@ -19,8 +23,13 @@ class Auth extends Gatherer {
         await page.click('input[name=password]');
         await page.keyboard.type(process.env.ADMIN_PASSWORD);
 
+        console.log('click');
+        console.log(await page.content());
         await page.click('button[type="submit"]');
+        console.log('waiting');
+        console.log(await page.content());
         await page.waitForSelector('#logout');
+        console.log('done');
 
         browser.disconnect();
         return {};

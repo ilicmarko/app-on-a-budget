@@ -16,6 +16,7 @@ class Auth extends Gatherer {
 
         console.log(process.env.ADMIN_USER);
         console.log(process.env.ADMIN_PASSWORD);
+        console.log(await page.content());
 
         await page.click('input[name=username]');
         await page.keyboard.type(process.env.ADMIN_USER);

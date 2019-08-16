@@ -11,12 +11,6 @@ module.exports = {
     path: Path.join(__dirname, '../build'),
     filename: 'js/[name].js'
   },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      name: false
-    }
-  },
   plugins: [
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin([
@@ -24,7 +18,17 @@ module.exports = {
     ]),
     new HtmlWebpackPlugin({
       template: Path.resolve(__dirname, '../src/index.html')
-    })
+    }),
+    new HtmlWebpackPlugin({
+      filename: "admin.html",
+      template: Path.resolve(__dirname, '../src/admin.html'),
+      chunks: ['app'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: "login.html",
+      template: Path.resolve(__dirname, '../src/login.html'),
+      chunks: ['app'],
+    }),
   ],
   resolve: {
     alias: {

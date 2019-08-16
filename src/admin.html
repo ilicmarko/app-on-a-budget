@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        const username = localStorage.getItem('username');
+        const password = localStorage.getItem('password');
+
+        if (username && password && username === password && username === 'admin') {
+            console.log('Good hacker');
+        } else {
+            console.log('You shell not pass');
+            history.go(-1);
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ADMIN || Website on a budget</title>
+</head>
+<body>
+    <h1>This is a secret page</h1>
+    <p>May the optimization be with you.</p>
+    <button id="logout" onclick="localStorage.clear(); window.location.href = 'index.html';">Logout</button>
+</body>
+</html>

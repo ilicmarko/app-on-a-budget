@@ -3,7 +3,9 @@
     "performance": 90,
     "accessibility": 80,
     "best-practices": 80,
-    "seo": 80
+    "seo": 80,
+    "pwa": 0
   },
-  "bundleSize": 200
+  "bundleSize": 50,
+  "bundleName": "js/app.*\\.js"
 }

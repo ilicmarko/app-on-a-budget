@@ -1,0 +1,17 @@
+module.exports = {
+    extends: "lighthouse:default",
+    passes: [{
+        passName: 'defaultPass',
+        gatherers: [
+            'auth-gatherer',
+        ],
+    }],
+    audits: ["weight-audit", "auth-audit"],
+    categories: {
+        "bundle-size": {
+            title: "Velicina JS datoteke",
+            description: "Alooo bato, ajmo malo crossfit za sajt! Imamo kolegu s posla ako treba veza...",
+            auditRefs: [{ id: "weight-audit", weight: 1 }]
+        }
+    }
+};
